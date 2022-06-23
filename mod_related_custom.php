@@ -14,14 +14,27 @@ use Joomla\CMS\Helper\ModuleHelper;
 // Include the related_custom functions only once
 JLoader::register('ModRelatedcustomHelper', __DIR__ . '/helper.php');
 
-$cacheparams = new stdClass;
-$cacheparams->cachemode = 'safeuri';
-$cacheparams->class = 'ModRelatedcustomHelper';
-$cacheparams->method = 'getList';
+$cacheparams               = new stdClass;
+$cacheparams->cachemode    = 'safeuri';
+$cacheparams->class        = 'ModRelatedcustomHelper';
+$cacheparams->method       = 'getList';
 $cacheparams->methodparams = $params;
-$cacheparams->modeparams = array('id' => 'array', 'Itemid' => 'int');
+$cacheparams->modeparams   = array('id' => 'array', 'Itemid' => 'int');
 
-$list = ModuleHelper::moduleCache($module, $params, $cacheparams);
+$backfill = false;
+$list     = ModuleHelper::moduleCache($module, $params, $cacheparams);
+
+$params->set('running_count', count($list));
+
+if (count($list) < $params->get('maximum', 0) && $params->get('backfill', 0) != 0)
+{
+	// do the backfill
+	$cacheparams->class        = 'ModRelatedcustomHelper';
+	$cacheparams->method       = 'getBackFill';
+	$cacheparams->methodparams = $params;
+
+	$backfill = ModuleHelper::moduleCache($module, $params, $cacheparams);
+}
 
 /* if (!count($list))
 {
