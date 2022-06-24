@@ -217,7 +217,7 @@ abstract class ModRelatedcustomHelper
 
 		// For now assume com_tags and com_users do not have tags.
 		// This module does not apply to list views in general at this point.
-		if ($option === 'com_tags' || $view === 'category' || $option === 'com_users')
+		if (($option === 'com_tags' || $view === 'category' || $option === 'com_users') && $backfilltype == 0)
 		{
 			return array();
 		}
