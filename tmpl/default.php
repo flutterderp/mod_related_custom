@@ -9,6 +9,7 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
@@ -58,10 +59,11 @@ use Joomla\Registry\Registry;
 					$images      = new Registry($item->core_images);
 					$images      = $images->toArray();
 					$image_intro = isset($images['image_intro']) ? $images['image_intro'] : $item->core_images;
+					$image_intro = HTMLHelper::cleanImageUrl($image_intro);
 					?>
 					<a href="<?php echo Route::_($item->link); ?>">
-						<?php if($image_intro && file_exists(JPATH_BASE . '/' . $image_intro)) : ?>
-							<img src="<?php echo $image_intro; ?>" alt="<?php echo $item->core_alias; ?>" loading="lazy">
+						<?php if($image_intro->url && file_exists(JPATH_BASE . '/' . $image_intro->url)) : ?>
+							<img src="<?php echo $image_intro->url; ?>" alt="<?php echo $item->core_alias; ?>" loading="lazy">
 						<?php else : ?>
 							<img src="https://via.placeholder.com/510x340/ccc/ccc" alt="<?php echo $item->core_alias; ?>" loading="lazy">
 						<?php endif; ?>
