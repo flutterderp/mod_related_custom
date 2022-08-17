@@ -115,9 +115,11 @@ abstract class ModRelatedcustomHelper
 		// Only return published tags
 		$query->where($db->quoteName('cc.core_state') . ' = 1 ')
 			->where('(' . $db->quoteName('cc.core_publish_up') . '=' . $db->quote($nullDate) . ' OR '
+				. 'ISNULL(' . $db->quoteName('cc.core_publish_up') . ')' . ' OR '
 				. $db->quoteName('cc.core_publish_up') . '<=' . $db->quote($now) . ')'
 			)
 			->where('(' . $db->quoteName('cc.core_publish_down') . '=' . $db->quote($nullDate) . ' OR '
+				. 'ISNULL(' . $db->quoteName('cc.core_publish_down') . ')' . ' OR '
 				. $db->quoteName('cc.core_publish_down') . '>=' . $db->quote($now) . ')'
 			);
 
@@ -277,9 +279,11 @@ abstract class ModRelatedcustomHelper
 		// Only return published tags
 		$query->where($db->quoteName('a.' . $fields->common->core_state) . ' = 1 ')
 			->where('(' . $db->quoteName('a.' . $fields->common->core_publish_up) . '=' . $db->quote($nullDate) . ' OR '
+				. 'ISNULL(' . $db->quoteName('a.' . $fields->common->core_publish_up) . ')' . ' OR '
 				. $db->quoteName('a.' . $fields->common->core_publish_up) . '<=' . $db->quote($now) . ')'
 			)
 			->where('(' . $db->quoteName('a.' . $fields->common->core_publish_down) . '=' . $db->quote($nullDate) . ' OR '
+				. 'ISNULL(' . $db->quoteName('a.' . $fields->common->core_publish_down) . ')' . ' OR '
 				. $db->quoteName('a.' . $fields->common->core_publish_down) . '>=' . $db->quote($now) . ')'
 			);
 
