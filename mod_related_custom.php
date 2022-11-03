@@ -21,8 +21,9 @@ $cacheparams->method       = 'getList';
 $cacheparams->methodparams = $params;
 $cacheparams->modeparams   = array('id' => 'array', 'Itemid' => 'int');
 
-$backfill = false;
-$list     = ModuleHelper::moduleCache($module, $params, $cacheparams);
+$backfill   = false;
+$list       = ModuleHelper::moduleCache($module, $params, $cacheparams);
+$show_empty = (int) $params->get('show_empty_module', 0, 'int');
 
 $params->set('running_count', count($list));
 
@@ -43,4 +44,7 @@ if (count($list) < $params->get('maximum', 0) && $params->get('backfill', 0) != 
 
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx', ''), ENT_COMPAT, 'UTF-8');
 
-require ModuleHelper::getLayoutPath('mod_related_custom', $params->get('layout', 'default'));
+if ((int) $show_empty !== 0 || !empty($list) || !empty($backfill))
+{
+	require ModuleHelper::getLayoutPath('mod_related_custom', $params->get('layout', 'default'));
+}
