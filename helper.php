@@ -158,12 +158,7 @@ abstract class ModRelatedcustomHelper
 			$query->having('COUNT( ' . $db->quoteName('tag_id') . ')  >= ' . $tagCountHalf);
 		}
 
-		if ($ordering === 'latest')
-		{
-			$query->order($db->quoteName('cc.core_publish_up') . ' DESC');
-		}
-
-		if ($ordering === 'count' || $ordering === 'countrandom')
+		if ($ordering === 'count' || $ordering === 'countlatest' || $ordering === 'countrandom')
 		{
 			$query->order($db->quoteName('count') . ' DESC');
 		}
@@ -171,6 +166,11 @@ abstract class ModRelatedcustomHelper
 		if ($ordering === 'random' || $ordering === 'countrandom')
 		{
 			$query->order($query->Rand());
+		}
+
+		if ($ordering === 'latest' || $ordering === 'countlatest')
+		{
+			$query->order($db->quoteName('cc.core_publish_up') . ' DESC');
 		}
 
 		$db->setQuery($query, 0, $maximum);

@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
-	<version>3.1.4</version>
+	<version>3.1.5</version>
 	<description>MOD_RELATED_CUSTOM_XML_DESCRIPTION</description>
 	<files>
 		<filename module="mod_related_custom">mod_related_custom.php</filename>
@@ -102,6 +102,7 @@
 					>
 					<option value="latest">MOD_RELATED_CUSTOM_FIELD_ORDERING_LATEST</option>
 					<option value="count">MOD_RELATED_CUSTOM_FIELD_ORDERING_COUNT</option>
+					<option value="countlatest">MOD_RELATED_CUSTOM_FIELD_ORDERING_COUNT_AND_LATEST</option>
 					<option value="random">MOD_RELATED_CUSTOM_FIELD_ORDERING_RANDOM</option>
 					<option value="countrandom">MOD_RELATED_CUSTOM_FIELD_ORDERING_COUNT_AND_RANDOM</option>
 				</field>
