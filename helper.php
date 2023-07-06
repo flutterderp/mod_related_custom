@@ -271,7 +271,13 @@ abstract class ModRelatedcustomHelper
 			. $db->quoteName('a.' . $fields->common->core_access) . ' = 0)');
 
 		// Don't show current item
-		if ((int) $id > 0)
+		if (is_array($id) && count($id) > 0)
+		{
+			$id = implode(',', $id);
+
+			$query->where($db->quoteName('a.' . $fields->common->core_content_item_id) . ' NOT IN (' . $id . ')');
+		}
+		elseif ((int) $id > 0)
 		{
 			$query->where($db->quoteName('a.' . $fields->common->core_content_item_id) . ' <> ' . $id);
 		}
