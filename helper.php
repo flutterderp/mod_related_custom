@@ -91,6 +91,7 @@ abstract class ModRelatedcustomHelper
 					$db->quoteName('cc.core_title'),
 					$db->quoteName('cc.core_alias'),
 					$db->quoteName('cc.core_catid'),
+					$db->quoteName('cc.core_body'),
 					$db->quoteName('cc.core_images'),
 					$db->quoteName('cc.core_language'),
 					$db->quoteName('cc.core_params'),
